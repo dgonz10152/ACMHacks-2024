@@ -21,7 +21,9 @@ import { useState, useCallback } from "react";
 function DrawerInfo() {
 	return (
 		<Box className="w-56">
-			<Typography variant="h5">Basic Needs Facilities</Typography>
+			<Typography variant="h5" className=" p-4">
+				Basic Needs Facilities
+			</Typography>
 			<Divider />
 			<List>
 				<ListItemButton href="/" className="p-6 m-2" variant="contained">
