@@ -11,6 +11,7 @@ const facilityConfig = {
 	Friday_hours: "Closed",
 	Saturday_hours: "Closed",
 	Sunday_hours: "Closed",
+	Products_offered: ["Vegetables", "Fruits", "Flowers"]
 	
 }
 

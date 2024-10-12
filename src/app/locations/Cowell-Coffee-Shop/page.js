@@ -11,7 +11,7 @@ const facilityConfig = {
 	Friday_hours: "10AM - 3:30PM",
 	Saturday_hours: "Closed",
 	Sunday_hours: "Closed",
-	Products_offered: "rice\nmilk\nvegetables\nchicken\nsoap"
+	Products_offered: ["Coffee", "Tea", "Salad", "Bagels", "Premade food options"]
 	
 }
 

@@ -21,6 +21,14 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 function PageTemplate({config}) {
+	const foodList = Array.isArray(config.Products_offered) ? config.Products_offered : [];
+
+    const foodsOffered = foodList.map((food, index) => (
+        <ListItem key={index} sx={{ padding: '0', marginBottom: "-8px" }}>
+            <ListItemText primary={food} /> {/* Each food item is displayed */}
+        </ListItem>
+    ));
+
     return (
         <div>
             <AppBar position="static">
@@ -51,18 +59,7 @@ function PageTemplate({config}) {
 
                             <Typography variant="h5" style={{ marginTop: "20px" }}>Products Offered</Typography>
                             <List>
-                                <ListItem>
-                                    <ListItemText primary={config.Products_offered} />
-                                </ListItem>
-                                <ListItem>
-                                    <ListItemText primary="Grilled Chicken Salad" />
-                                </ListItem>
-                                <ListItem>
-                                    <ListItemText primary="Margherita Pizza" />
-                                </ListItem>
-                                <ListItem>
-                                    <ListItemText primary="Chocolate Lava Cake" />
-                                </ListItem>
+                                {foodsOffered}
                             </List>
                         </Paper>
                     </Grid>
