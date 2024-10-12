@@ -52,7 +52,7 @@ function PageTemplate({config}) {
                             <Typography variant="h5" style={{ marginTop: "20px" }}>Products Offered</Typography>
                             <List>
                                 <ListItem>
-                                    <ListItemText primary="Pasta Primavera" />
+                                    <ListItemText primary={config.Products_offered} />
                                 </ListItem>
                                 <ListItem>
                                     <ListItemText primary="Grilled Chicken Salad" />
