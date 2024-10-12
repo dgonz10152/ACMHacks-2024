@@ -1,16 +1,20 @@
-"use client";
+import PageTemplate from "../templateSite/page";
 
-import { Button } from "@mui/material";
-import { usePathname } from "next/navigation";
+const facilityConfig = {
+	Name: "Redwood Free Market",
+	Location: "PLACE",
+	About: "The Redwood Free Market is dedicated to decreasing basic needs insecurity by providing free access to healthy food and connecting students to campus and community resources.",
+	Monday_hours: "2PM - 5PM",
+	Tuesday_hours: "9AM - 1PM, 2PM - 5PM",
+	Wednesday_hours: "9AM - 1PM, 2PM - 5PM",
+	Thursday_hours: "9AM - 1PM, 2PM - 5PM",
+	Friday_hours: "9AM - 12PM",
+	Saturday_hours: "Closed",
+	Sunday_hours: "Closed",
+	
+}
 
-export default function Home() {
-	const pathName = usePathname();
-	return (
-		<div>
-			<h1 className="p-10 flex justify-center">{pathName}</h1>
-			<a href="/">
-				<Button variant="outlined">Home</Button>
-			</a>
-		</div>
-	);
+export default function Home(){
+	return(<PageTemplate config={facilityConfig} />)
+
 }
