@@ -12,6 +12,7 @@ export default function Home() {
 			<h1 className="p-10 flex justify-center text-red-400">Home Page</h1>
 			<a href="/locations">
 				<Button variant="outlined">Check out our locations</Button>
+				<p>Testing</p>
 			</a>
 		</>
 	);
