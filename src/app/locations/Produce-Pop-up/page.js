@@ -1,16 +1,21 @@
-"use client";
+import PageTemplate from "../templateSite/page";
 
-import { Button } from "@mui/material";
-import { usePathname } from "next/navigation";
+const facilityConfig = {
+	Name: "Produce Pop Up($)",
+	Location: "PLACE",
+	About: "Low-cost produce stand with fresh fruits & veggies from the UCSC Farm & Santa Cruz Farmers' Market. The Produce Pop-Up aims to increase access to fresh, nutritious food for students and the campus community.Cash, check, card & EBT accepted. ",
+	Monday_hours: "Closed",
+	Tuesday_hours: "Closed",
+	Wednesday_hours: "11AM - 3PM",
+	Thursday_hours: "Closed",
+	Friday_hours: "11AM - 3PM",
+	Saturday_hours: "Closed",
+	Sunday_hours: "Closed",
+	Products_offered: ["Fresh fruits", "Fresh veggies"]
+	
+}
 
-export default function Home() {
-	const pathName = usePathname();
-	return (
-		<div>
-			<h1 className="p-10 flex justify-center">{pathName}</h1>
-			<a href="/">
-				<Button variant="outlined">Home</Button>
-			</a>
-		</div>
-	);
+export default function Home(){
+	return(<PageTemplate config={facilityConfig} />)
+
 }

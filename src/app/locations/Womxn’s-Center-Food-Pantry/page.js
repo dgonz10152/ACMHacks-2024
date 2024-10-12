@@ -1,16 +1,21 @@
-"use client";
+import PageTemplate from "../templateSite/page";
 
-import { Button } from "@mui/material";
-import { usePathname } from "next/navigation";
+const facilityConfig = {
+	Name: "Womxn's Center Food Pantry",
+	Location: "PLACE",
+	About: "The UCSC Womxn’s Center affirms the dignity and diversity of all women. The center continues and challenges feminist traditions by creating community space for all women and their allies to achieve individual and social change.",
+	Monday_hours: "Closed",
+	Tuesday_hours: "10AM - 4PM",
+	Wednesday_hours: "Closed",
+	Thursday_hours: "10AM - 4PM",
+	Friday_hours: "Closed",
+	Saturday_hours: "Closed",
+	Sunday_hours: "Closed",
+	Products_offered: ["Canned foods", "Dry goods"]
+	
+}
 
-export default function Home() {
-	const pathName = usePathname();
-	return (
-		<div>
-			<h1 className="p-10 flex justify-center">{pathName}</h1>
-			<a href="/">
-				<Button variant="outlined">Home</Button>
-			</a>
-		</div>
-	);
+export default function Home(){
+	return(<PageTemplate config={facilityConfig} />)
+
 }
