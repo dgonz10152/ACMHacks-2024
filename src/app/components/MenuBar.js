@@ -23,14 +23,11 @@ function DrawerInfo() {
 	return (
 		<Box className="w-56">
 			<Typography variant="h5" style={{fontFamily:'Monaco, "Courier New", monospace'}}>Basic Needs Facilities</Typography>
-			<Typography variant="h5" className=" p-4">
-				Basic Needs Facilities
-			</Typography>
 			<Divider />
 			<List>
 				<ul>
 					<Button href="/About/" className="text-black">ABOUT US</Button>
-					<Button href="/app/" className="text-black">home</Button>
+					<Button href="/" className="text-black">home</Button>
 				</ul>
 			</List>
 		</Box>
