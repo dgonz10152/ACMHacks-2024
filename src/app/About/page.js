@@ -7,11 +7,10 @@ import { useMediaQuery } from "@mui/material";
 
 
 export default function Home() {
-<<<<<<< HEAD
   return (
     <>
       <MenuBar></MenuBar>
-      <div className="inset-0 bg-blue-400 w-full h-100 z-full">
+      <div className="inset-0 bg-blue-400 w-100vh h-100vh">
         <section className="relative flex justify-center items-center h-48 m-6">
           <div className="absolute inset-0 bg-white w-full h-full rounded-lg z-0">
             <Typography
@@ -113,7 +112,7 @@ export default function Home() {
       </div>
     </>
   );
-=======
+
 	const isMobile = useMediaQuery("(max-width:600px)");
 
 	return (
@@ -257,5 +256,4 @@ export default function Home() {
 			</div>
 		</>
 	);
->>>>>>> a6e404ac64ce4d343362f0126d52ba5592a124e8
 }
