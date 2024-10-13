@@ -1,9 +1,6 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
-import Link from "next/link";
 import Typography from "@mui/material/Typography";
-import Grid2 from "@mui/material/Grid2";
-import Paper from "@mui/material/Paper";
 import MenuBar from "@/app/components/MenuBar";
 import { Box } from "@mui/system";
 import { useMediaQuery } from "@mui/material";
