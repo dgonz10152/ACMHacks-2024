@@ -1,5 +1,5 @@
 import React from "react";
-import MenuBar from "../components/MenuBar"
+import MenuBar from "@/app/components/MenuBar"
 import {
     AppBar,
     Toolbar,
@@ -32,7 +32,7 @@ function PageTemplate({ config }) {
     return (
         <div>
             <MenuBar></MenuBar>
-            <AppBar position="static">
+            <AppBar className="pt-[5vh]" position="static">
                 <Toolbar>
                     <Typography variant="h4" style={{ flexGrow: 1 }} className="flex justify-center">
                         {config.Name}
