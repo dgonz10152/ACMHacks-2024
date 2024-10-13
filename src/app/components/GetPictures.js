@@ -11,7 +11,7 @@ export default function GetPictures(location) {
 
 	useEffect(() => {
 		const fetchImages = async () => {
-			const imagesRef = ref(storage, `${location}/`);
+			const imagesRef = ref(storage, location.location + "/");
 
 			try {
 				const result = await listAll(imagesRef);

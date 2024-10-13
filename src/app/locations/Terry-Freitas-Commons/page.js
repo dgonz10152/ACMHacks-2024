@@ -1,22 +1,34 @@
-import PageTemplate from "../templateSite/page";
+"use client";
 
-const facilityConfig = {
-	Name: "Terry Freitas Commons",
-	Location: "PLACE",
-	About: "Terry Freitas Commons (TFC) is a fully student-led organization that serves as a lounge and food pantry for all students. TFC also provides a welcoming space for people to study, have meetings, and socialize through playing pool, piano, and games. TFC has had a long legacy as an organization that is by the students and for the students. It was created to provide a welcoming space for students to connect, play pool, express themselves, explore social justice on a global level, and study. (collegenine.ucsc.edu)",
-	Monday_hours: "9AM - 9PM",
-	Tuesday_hours: "11AM - 7PM",
-	Wednesday_hours: "9AM -9PM",
-	Thursday_hours: "11AM - 7PM",
-	Friday_hours: "9AM - 5PM",
-	Saturday_hours: "Closed",
-	Sunday_hours: "Closed",
-	Products_offered: ["Canned foods", "Dry goods"],
-	Image: "https://collegenine.ucsc.edu/residential-life/terry_freitas_pic2a.jpg"
-	
+import PageTemplate from "../templateSite/page";
+import { db } from "@/app/firebaseConfig";
+import { getDocs, collection } from "firebase/firestore";
+import { useEffect, useState } from "react";
+
+async function fetchDataFromFirestore() {
+	const querySnapshot = await getDocs(collection(db, "locationData"));
+	const data = [];
+	querySnapshot.forEach((doc) => {
+		data.push({ id: doc.id, ...doc.data() });
+	});
+	return data;
 }
 
-export default function Home(){
-	return(<PageTemplate config={facilityConfig} />)
+export default function Home() {
+	const [loading, setLoading] = useState(true);
+	const [facilityConfig, setFacilityConfig] = useState(null);
+	useEffect(() => {
+		async function fetchData() {
+			const data = await fetchDataFromFirestore();
+			data.forEach((location) => {
+				if (location.Name == "Terry Freitas Commons") {
+					setFacilityConfig(location);
+					setLoading(false);
+				}
+			});
+		}
+		fetchData();
+	}, []);
 
+	return <>{loading ? <div></div> : <PageTemplate config={facilityConfig} />}</>;
 }

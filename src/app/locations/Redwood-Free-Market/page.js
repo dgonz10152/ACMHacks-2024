@@ -1,21 +1,34 @@
-import PageTemplate from "../templateSite/page";
+"use client";
 
-const facilityConfig = {
-	Name: "Redwood Free Market",
-	Location: "PLACE",
-	About: "The Redwood Free Market is dedicated to decreasing basic needs insecurity by providing free access to healthy food and connecting students to campus and community resources.",
-	Monday_hours: "2PM - 5PM",
-	Tuesday_hours: "9AM - 1PM, 2PM - 5PM",
-	Wednesday_hours: "9AM - 1PM, 2PM - 5PM",
-	Thursday_hours: "9AM - 1PM, 2PM - 5PM",
-	Friday_hours: "9AM - 12PM",
-	Saturday_hours: "Closed",
-	Sunday_hours: "Closed",
-	Products_offered: ["Produce", "Dry goods", "Coffee", "Soap", "Chicken"]
-	
+import PageTemplate from "../templateSite/page";
+import { db } from "@/app/firebaseConfig";
+import { getDocs, collection } from "firebase/firestore";
+import { useEffect, useState } from "react";
+
+async function fetchDataFromFirestore() {
+	const querySnapshot = await getDocs(collection(db, "locationData"));
+	const data = [];
+	querySnapshot.forEach((doc) => {
+		data.push({ id: doc.id, ...doc.data() });
+	});
+	return data;
 }
 
-export default function Home(){
-	return(<PageTemplate config={facilityConfig} />)
+export default function Home() {
+	const [loading, setLoading] = useState(true);
+	const [facilityConfig, setFacilityConfig] = useState(null);
+	useEffect(() => {
+		async function fetchData() {
+			const data = await fetchDataFromFirestore();
+			data.forEach((location) => {
+				if (location.Name == "Redwood Free Market") {
+					setFacilityConfig(location);
+					setLoading(false);
+				}
+			});
+		}
+		fetchData();
+	}, []);
 
+	return <>{loading ? <div></div> : <PageTemplate config={facilityConfig} />}</>;
 }

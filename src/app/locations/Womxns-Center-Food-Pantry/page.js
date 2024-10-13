@@ -1,22 +1,34 @@
-import PageTemplate from "../templateSite/page";
+"use client";
 
-const facilityConfig = {
-	Name: "Womxn's Center Food Pantry",
-	Location: "PLACE",
-	About: "The UCSC Womxn’s Center affirms the dignity and diversity of all women. The center continues and challenges feminist traditions by creating community space for all women and their allies to achieve individual and social change.",
-	Monday_hours: "Closed",
-	Tuesday_hours: "10AM - 4PM",
-	Wednesday_hours: "Closed",
-	Thursday_hours: "10AM - 4PM",
-	Friday_hours: "Closed",
-	Saturday_hours: "Closed",
-	Sunday_hours: "Closed",
-	Products_offered: ["Canned foods", "Dry goods"],
-	Image: "https://womenscenter.ucsc.edu/copy-of-website-banner.png"
-	
+import PageTemplate from "../templateSite/page";
+import { db } from "@/app/firebaseConfig";
+import { getDocs, collection } from "firebase/firestore";
+import { useEffect, useState } from "react";
+
+async function fetchDataFromFirestore() {
+	const querySnapshot = await getDocs(collection(db, "locationData"));
+	const data = [];
+	querySnapshot.forEach((doc) => {
+		data.push({ id: doc.id, ...doc.data() });
+	});
+	return data;
 }
 
-export default function Home(){
-	return(<PageTemplate config={facilityConfig} />)
+export default function Home() {
+	const [loading, setLoading] = useState(true);
+	const [facilityConfig, setFacilityConfig] = useState(null);
+	useEffect(() => {
+		async function fetchData() {
+			const data = await fetchDataFromFirestore();
+			data.forEach((location) => {
+				if (location.Name == "Womxn's Center Food Pantry") {
+					setFacilityConfig(location);
+					setLoading(false);
+				}
+			});
+		}
+		fetchData();
+	}, []);
 
+	return <>{loading ? <div></div> : <PageTemplate config={facilityConfig} />}</>;
 }

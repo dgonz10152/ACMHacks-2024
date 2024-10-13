@@ -1,22 +1,34 @@
-import PageTemplate from "../templateSite/page";
+"use client";
 
-const facilityConfig = {
-	Name: "The Cove",
-	Location: "PLACE",
-	About: "The Cove is an all-inclusive community for students recovering from alcohol and/or other drugs, loved ones of those with addictions, allies, and anyone else who supports recovery. We are a diverse group, varying in ages and lengths of sobriety. The Cove is supported by staff and faculty at the university and community members. ",
-	Monday_hours: "1PM - 5PM",
-	Tuesday_hours: "9AM - 12PM",
-	Wednesday_hours: "Remote Service Only",
-	Thursday_hours: "9AM - 12PM",
-	Friday_hours: "1PM - 5PM",
-	Saturday_hours: "Closed",
-	Sunday_hours: "Closed",
-	Products_offered: [],
-	Image: "https://shop.ucsc.edu/students-in-recovery/images/cove-banner.png"
-	
+import PageTemplate from "../templateSite/page";
+import { db } from "@/app/firebaseConfig";
+import { getDocs, collection } from "firebase/firestore";
+import { useEffect, useState } from "react";
+
+async function fetchDataFromFirestore() {
+	const querySnapshot = await getDocs(collection(db, "locationData"));
+	const data = [];
+	querySnapshot.forEach((doc) => {
+		data.push({ id: doc.id, ...doc.data() });
+	});
+	return data;
 }
 
-export default function Home(){
-	return(<PageTemplate config={facilityConfig} />)
+export default function Home() {
+	const [loading, setLoading] = useState(true);
+	const [facilityConfig, setFacilityConfig] = useState(null);
+	useEffect(() => {
+		async function fetchData() {
+			const data = await fetchDataFromFirestore();
+			data.forEach((location) => {
+				if (location.Name == "The Cove") {
+					setFacilityConfig(location);
+					setLoading(false);
+				}
+			});
+		}
+		fetchData();
+	}, []);
 
+	return <>{loading ? <div></div> : <PageTemplate config={facilityConfig} />}</>;
 }

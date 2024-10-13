@@ -1,22 +1,34 @@
-import PageTemplate from "../templateSite/page";
+"use client";
 
-const facilityConfig = {
-	Name: "Lionel Cantu Queer Center Food Pantry",
-	Location: "PLACE",
-	About: "The Cantú Food Pantry was designed for all hungry students on campus, and specifically with queer and trans students in mind. We offer a self-service pantry stocked with food staples as well as snacks, refrigerated and frozen items. We also welcome and appreciate donations of Capri Suns, Small Chip Bags, Granola Bars, and Ramen!",
-	Monday_hours: "Closed",
-	Tuesday_hours: "10AM - 5PM",
-	Wednesday_hours: "10AM - 5PM",
-	Thursday_hours: "10AM - 5PM",
-	Friday_hours: "10AM - 5PM",
-	Saturday_hours: "Closed",
-	Sunday_hours: "Closed",
-	Products_offered: ["Produce", "Snacks", "Frozen items"],
-	Image: "https://queer.ucsc.edu/about-us/resources-1-12.png"
-	
+import PageTemplate from "../templateSite/page";
+import { db } from "@/app/firebaseConfig";
+import { getDocs, collection } from "firebase/firestore";
+import { useEffect, useState } from "react";
+
+async function fetchDataFromFirestore() {
+	const querySnapshot = await getDocs(collection(db, "locationData"));
+	const data = [];
+	querySnapshot.forEach((doc) => {
+		data.push({ id: doc.id, ...doc.data() });
+	});
+	return data;
 }
 
-export default function Home(){
-	return(<PageTemplate config={facilityConfig} />)
+export default function Home() {
+	const [loading, setLoading] = useState(true);
+	const [facilityConfig, setFacilityConfig] = useState(null);
+	useEffect(() => {
+		async function fetchData() {
+			const data = await fetchDataFromFirestore();
+			data.forEach((location) => {
+				if (location.Name == "Lionel Cantu Queer Center Food Pantry") {
+					setFacilityConfig(location);
+					setLoading(false);
+				}
+			});
+		}
+		fetchData();
+	}, []);
 
+	return <>{loading ? <div></div> : <PageTemplate config={facilityConfig} />}</>;
 }
