@@ -1,5 +1,9 @@
 import React from "react";
+<<<<<<< HEAD
 import MenuBar from "@/app/components/MenuBar"
+=======
+import MenuBar from "../components/MenuBar";
+>>>>>>> 664749eeae22bc82af6cecdab3384c782dfd222a
 import {
     AppBar,
     Toolbar,
