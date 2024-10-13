@@ -2,6 +2,7 @@
 
 import MenuIcon from "@mui/icons-material/Menu";
 import InfoIcon from "@mui/icons-material/Info";
+import Button from "@mui/material/Button";
 
 import {
 	AppBar,
@@ -21,15 +22,13 @@ import { useState, useCallback } from "react";
 function DrawerInfo() {
 	return (
 		<Box className="w-56">
-			<Typography variant="h5">Basic Needs Facilities</Typography>
+			<Typography variant="h5" style={{fontFamily:'Monaco, "Courier New", monospace'}}>Basic Needs Facilities</Typography>
 			<Divider />
 			<List>
-				<ListItemButton href="/" className="p-6 m-2" variant="contained">
-					<ListItemIcon>
-						<InfoIcon />
-					</ListItemIcon>
-					<ListItemText>About</ListItemText>
-				</ListItemButton>
+				<ul>
+					<Button href="/About/" className="text-black">ABOUT US</Button>
+					<Button href="/app/" className="text-black">home</Button>
+				</ul>
 			</List>
 		</Box>
 	);
@@ -44,7 +43,7 @@ export default function MenuBar() {
 	return (
 		<>
 			<Box>
-				<AppBar className="flex-row h-[5vh]">
+				<AppBar className="flex-row h-[5vh]  bg-yellow-500">
 					<IconButton onClick={toggleDrawer(true)}>
 						<MenuIcon></MenuIcon>
 					</IconButton>
