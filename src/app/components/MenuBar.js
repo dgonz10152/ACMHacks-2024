@@ -3,6 +3,9 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import InfoIcon from "@mui/icons-material/Info";
 import Button from "@mui/material/Button";
+import HomeIcon from "@mui/icons-material/Home";
+import FoodBankIcon from "@mui/icons-material/FoodBank";
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 import {
   AppBar,
@@ -19,72 +22,136 @@ import {
 
 import { useState, useCallback } from "react";
 
-
 function DrawerInfo() {
   return (
     <Box className="w-56">
-      <Typography variant="h5"style={{ fontFamily: 'Monaco, "Courier New", monospace' }}>
+      <Typography
+        variant="h5"
+        style={{ fontFamily: 'Monaco, "Courier New", monospace' }}
+      >
         Basic Needs Facilities
       </Typography>
       <Divider />
       <List className="p-3 m-2">
-        <ul>	
-          <ListItemButton href="/About/" className="text-black" >
-		  <ListItemIcon>
-		  <InfoIcon />
-		  </ListItemIcon>
-		  ABOUT US
+        <ul>
+          <ListItemButton href="/" className="text-black">
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            HOME
+          </ListItemButton>
+        </ul>
+		<ul>
+          <ListItemButton href="/Map" className="text-black">
+            <ListItemIcon>
+              <LocationOnIcon />
+            </ListItemIcon>
+            MAP
           </ListItemButton>
         </ul>
         <ul>
-          <Button href="/" className="text-black">
-            HOME
-          </Button>
+          <ListItemButton href="/locations/The-Cove" className="text-black">
+            <ListItemIcon>
+              <FoodBankIcon />
+            </ListItemIcon>
+            THE COVE
+          </ListItemButton>
         </ul>
         <ul>
-          <Button href="/locations/The-Cove" className="text-black">
-            THE-COVE
-          </Button>
-        </ul>
-		<ul>
-          <Button href="/locations/Womxn's-Center-Food-Pantry" className="text-black">
+          <ListItemButton
+            href="/locations/Womxns-Center-Food-Pantry"
+            className="text-black"
+          >
+            <ListItemIcon>
+              <FoodBankIcon />
+            </ListItemIcon>
             WOMXNS CENTER FOOD PANTRY
-          </Button>
+          </ListItemButton>
         </ul>
-		<ul>
-          <Button href="/locations/Terry-Freitas-Commons" className="text-black">
+        <ul>
+          <ListItemButton
+            href="/locations/Terry-Freitas-Commons"
+            className="text-black"
+          >
+            <ListItemIcon>
+              <FoodBankIcon />
+            </ListItemIcon>
             TERRY FREITAS COMMON
-          </Button>
+          </ListItemButton>
         </ul>
-		<ul>
-          <Button href="/locations/Redwood-Free-Market" className="text-black">
+        <ul>
+		  <ListItemButton
+            href="/locations/Redwood-Free-Market"
+            className="text-black"
+          >
+            <ListItemIcon>
+              <FoodBankIcon />
+            </ListItemIcon>
             REDWOOD FREE MARKET
-          </Button>
+          </ListItemButton>
         </ul>
-		<ul>
-          <Button href="/locations/Produce-Pop-Up" className="text-black">
+        <ul>
+		  <ListItemButton
+            href="/locations/Produce-Pop-up"
+            className="text-black"
+          >
+            <ListItemIcon>
+              <FoodBankIcon />
+            </ListItemIcon>
             PRODUCE POP UP
-          </Button>
+          </ListItemButton>
         </ul>
-		<ul>
-          <Button href="/locations/Lionel-Cantu-Queer-Center-Food-Pantry" className="text-black">
+        <ul>
+		  <ListItemButton
+            href="/locations/Lionel-Cantu-Queer-Center-Food-Pantry"
+            className="text-black"
+          >
+            <ListItemIcon>
+              <FoodBankIcon />
+            </ListItemIcon>
             LIONEL CANTU QUEER CENTER FOOD PANTRY
-          </Button>
+          </ListItemButton>
         </ul>
-		<ul>
-          <Button href="/locations/Ethnic-Resource-Centers-Snack-Pantry" className="text-black">
+        <ul>
+		  <ListItemButton
+            href="/locations/Ethnic-Resource-Centers-Snack-Pantry"
+            className="text-black"
+          >
+            <ListItemIcon>
+              <FoodBankIcon />
+            </ListItemIcon>
             ETHNIC RESOURCE CENTERS SNACK PANTRY
-          </Button>
+          </ListItemButton>
         </ul>
-		<ul>
-          <Button href="/locations/Cowell-Coffee-Shop" className="text-black">
+        <ul>
+		  <ListItemButton
+            href="/locations/Cowell-Coffee-Shop"
+            className="text-black"
+          >
+            <ListItemIcon>
+              <FoodBankIcon />
+            </ListItemIcon>
             COWELL COFFEE SHOP
-          </Button>
+          </ListItemButton>
+        </ul>
+        <ul>
+	      <ListItemButton
+            href="/locations/Center-for-Agroecology-Farmstand"
+            className="text-black"
+          >
+            <ListItemIcon>
+              <FoodBankIcon />
+            </ListItemIcon>
+            CENTER FOR AGROECOLOGY FARMSTAND
+          </ListItemButton>
         </ul>
 		<ul>
-          <Button href="/locations/Center-for-Agroecology-Farnmstand" className="text-black">
-            CENTER FOR AGROECOLOGY FARMSTAND
-          </Button>
+          <ListItemButton href="/About/" className="text-black">
+            <ListItemIcon>
+              <InfoIcon />
+            </ListItemIcon>
+            ABOUT US
+          </ListItemButton>
         </ul>
       </List>
     </Box>
