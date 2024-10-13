@@ -11,7 +11,8 @@ const facilityConfig = {
 	Friday_hours: "10AM - 4PM",
 	Saturday_hours: "Closed",
 	Sunday_hours: "Closed",
-	Products_offered: ["meals", "snacks", "condiments", "drinks"]
+	Products_offered: ["meals", "snacks", "condiments", "drinks"],
+	Image: "https://resourcecenters.ucsc.edu/images/snack-pantry-instagram.png"
 	
 }
 

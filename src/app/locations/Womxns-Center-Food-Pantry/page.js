@@ -11,7 +11,8 @@ const facilityConfig = {
 	Friday_hours: "Closed",
 	Saturday_hours: "Closed",
 	Sunday_hours: "Closed",
-	Products_offered: ["Canned foods", "Dry goods"]
+	Products_offered: ["Canned foods", "Dry goods"],
+	Image: "https://womenscenter.ucsc.edu/copy-of-website-banner.png"
 	
 }
 

@@ -51,11 +51,11 @@ function PageTemplate({ config }) {
                                     alt="Restaurant Logo"
                                     height="300"
                                     image={config.Image}
+                                    
                                     title="Restaurant Logo"
                                 />
                                 <CardContent>
                                     <Typography variant="body2" color="text.secondary">
-                                        Redwood Free Market Logo
                                     </Typography>
                                 </CardContent>
                             </Card>
