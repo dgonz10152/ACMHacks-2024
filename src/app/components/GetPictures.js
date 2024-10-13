@@ -31,7 +31,7 @@ export default function GetPictures(location) {
 			<Box className="flex">
 				{images.map((url, index) => (
 					<Box key={url} className="p-3">
-						<Image src={url} alt="Picture" width={300} height={300} />
+						<Image src={url} alt="Picture" width={600} height={600} />
 					</Box>
 				))}
 			</Box>

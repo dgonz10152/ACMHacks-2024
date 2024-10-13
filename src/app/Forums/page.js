@@ -1,10 +1,18 @@
+"use client";
 
-import { PhotoGallery } from 'react-native-photo-gallery-api';
+import React from "react";
+import ImageUpload from "../components/ImageUpload";
+import { Container, Typography } from "@mui/material";
 
-import { useCallback, useEffect, useState } from 'react';
+const UploadPage = () => {
+	return (
+		<Container>
+			<Typography variant="h4" align="center" gutterBottom>
+				Image Upload
+			</Typography>
+			<ImageUpload />
+		</Container>
+	);
+};
 
-import { AppState, EmitterSubscription } from 'react-native';
-
-import { ImageDTO, isAboveIOS14, isAndroid } from 'src/Shared/Constants';
-import { convertCameraRollPicturesToImageDtoType, photoLibraryEventEmitter } from 'src/Shared/Utils';
-
+export default UploadPage;
