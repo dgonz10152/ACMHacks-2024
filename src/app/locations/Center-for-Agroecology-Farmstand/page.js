@@ -11,7 +11,8 @@ const facilityConfig = {
 	Friday_hours: "Closed",
 	Saturday_hours: "Closed",
 	Sunday_hours: "Closed",
-	Products_offered: ["Vegetables", "Fruits", "Flowers"]
+	Products_offered: ["Vegetables", "Fruits", "Flowers"],
+    Image: "https://basicneeds.ucsc.edu/food/rfm_logo"
 	
 }
 

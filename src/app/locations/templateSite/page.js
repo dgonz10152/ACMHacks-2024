@@ -1,4 +1,5 @@
 import React from "react";
+import MenuBar from "../components/MenuBar"
 import {
     AppBar,
     Toolbar,
@@ -13,27 +14,27 @@ import {
     Card,
     CardMedia,
     CardContent,
-    Button,
     Accordion,
     AccordionSummary,
     AccordionDetails
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-function PageTemplate({config}) {
-	const foodList = Array.isArray(config.Products_offered) ? config.Products_offered : [];
+function PageTemplate({ config }) {
+    const foodList = Array.isArray(config.Products_offered) ? config.Products_offered : [];
 
     const foodsOffered = foodList.map((food, index) => (
         <ListItem key={index} sx={{ padding: '0', marginBottom: "-8px" }}>
-            <ListItemText primary={food} /> {/* Each food item is displayed */}
+            <ListItemText primary={food} />
         </ListItem>
     ));
 
     return (
         <div>
+            <MenuBar></MenuBar>
             <AppBar position="static">
                 <Toolbar>
-                    <Typography variant="h4" style={{ flexGrow: 1 }}>
+                    <Typography variant="h4" style={{ flexGrow: 1 }} className="flex justify-center">
                         {config.Name}
                     </Typography>
                 </Toolbar>
@@ -41,21 +42,42 @@ function PageTemplate({config}) {
 
             <Container>
                 <Grid container spacing={3} style={{ marginTop: "20px" }}>
-                    <Grid item xs={12} md={8}>
+                    {/* Image Section (now at the top) */}
+                    <Grid item xs={12}>
+                        <Paper style={{ padding: "20px" }}>
+                            <Card>
+                                <CardMedia
+                                    component="img"
+                                    alt="Restaurant Logo"
+                                    height="300"
+                                    image={config.Image}
+                                    title="Restaurant Logo"
+                                />
+                                <CardContent>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Redwood Free Market Logo
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Paper>
+                    </Grid>
+
+                    {/* Facility Info */}
+                    <Grid item xs={12}>
                         <Paper style={{ padding: "20px" }}>
                             <Typography variant="h5">About</Typography>
                             <Typography>
-							{config.About}
+                                {config.About}
                             </Typography>
 
                             <Typography variant="h5" style={{ marginTop: "20px" }}>Facility Hours</Typography>
                             <Typography>Monday: {config.Monday_hours}</Typography>
-							<Typography>Tuesday: {config.Tuesday_hours}</Typography>
-							<Typography>Wednesday: {config.Wednesday_hours}</Typography>
-							<Typography>Thursday: {config.Thursday_hours}</Typography>
-							<Typography>Friday: {config.Friday_hours}</Typography>
-							<Typography>Saturday: {config.Saturday_hours}</Typography>
-							<Typography>Sunday: {config.Sunday_hours}</Typography>
+                            <Typography>Tuesday: {config.Tuesday_hours}</Typography>
+                            <Typography>Wednesday: {config.Wednesday_hours}</Typography>
+                            <Typography>Thursday: {config.Thursday_hours}</Typography>
+                            <Typography>Friday: {config.Friday_hours}</Typography>
+                            <Typography>Saturday: {config.Saturday_hours}</Typography>
+                            <Typography>Sunday: {config.Sunday_hours}</Typography>
 
                             <Typography variant="h5" style={{ marginTop: "20px" }}>Products Offered</Typography>
                             <List>
@@ -63,7 +85,10 @@ function PageTemplate({config}) {
                             </List>
                         </Paper>
                     </Grid>
+                </Grid>
 
+                {/* Photos Section */}
+                <Grid container spacing={3} style={{ marginTop: "20px" }}>
                     <Grid item xs={12} md={4}>
                         <Paper style={{ padding: "20px" }}>
                             <Typography variant="h5">Photos</Typography>
@@ -110,6 +135,7 @@ function PageTemplate({config}) {
                     </Grid>
                 </Grid>
 
+                {/* FAQ Section */}
                 <Box style={{ marginTop: "20px" }}>
                     <Typography variant="h5">FAQ</Typography>
                     <Accordion>
@@ -146,6 +172,6 @@ function PageTemplate({config}) {
             </Container>
         </div>
     );
-};
+}
 
 export default PageTemplate;
