@@ -27,9 +27,9 @@ function DrawerInfo() {
     <Box className="w-56">
       <Typography
         variant="h5"
-        style={{ fontFamily: 'Monaco, "Courier New", monospace' }}
+        style={{ fontFamily: 'Monaco, "Courier New", monospace' }} className="flex justify-center"
       >
-        Basic Needs Facilities
+        SlugAid
       </Typography>
       <Divider />
       <List className="p-3 m-2">
