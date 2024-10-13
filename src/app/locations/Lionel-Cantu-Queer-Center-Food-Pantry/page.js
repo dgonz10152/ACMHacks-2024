@@ -11,7 +11,8 @@ const facilityConfig = {
 	Friday_hours: "10AM - 5PM",
 	Saturday_hours: "Closed",
 	Sunday_hours: "Closed",
-	Products_offered: ["Produce", "Snacks", "Frozen items"]
+	Products_offered: ["Produce", "Snacks", "Frozen items"],
+	Image: "https://queer.ucsc.edu/about-us/resources-1-12.png"
 	
 }
 

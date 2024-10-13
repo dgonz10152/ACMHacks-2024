@@ -11,7 +11,8 @@ const facilityConfig = {
 	Friday_hours: "1PM - 5PM",
 	Saturday_hours: "Closed",
 	Sunday_hours: "Closed",
-	Products_offered: []
+	Products_offered: [],
+	Image: "https://shop.ucsc.edu/students-in-recovery/images/cove-banner.png"
 	
 }
 

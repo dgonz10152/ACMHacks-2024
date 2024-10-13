@@ -11,7 +11,8 @@ const facilityConfig = {
 	Friday_hours: "9AM - 5PM",
 	Saturday_hours: "Closed",
 	Sunday_hours: "Closed",
-	Products_offered: ["Canned foods", "Dry goods"]
+	Products_offered: ["Canned foods", "Dry goods"],
+	Image: "https://collegenine.ucsc.edu/residential-life/terry_freitas_pic2a.jpg"
 	
 }
 
