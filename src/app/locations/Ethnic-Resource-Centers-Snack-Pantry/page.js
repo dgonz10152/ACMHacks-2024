@@ -1,22 +1,34 @@
-import PageTemplate from "../templateSite/page";
+"use client";
 
-const facilityConfig = {
-	Name: "Ethnic Resource Centers Snack Pantry",
-	Location: "PLACE",
-	About: "The Ethnic Resource Centers are dedicated to combating food insecurity and are proud to host a pantry with healthy snacks and dry goods for UCSC students. It is open Mon-Fri from 10 AM-4 PM just check in with the front desk!",
-	Monday_hours: "10AM - 4PM",
-	Tuesday_hours: "10AM - 4PM",
-	Wednesday_hours: "10AM - 4PM",
-	Thursday_hours: "10AM - 4PM",
-	Friday_hours: "10AM - 4PM",
-	Saturday_hours: "Closed",
-	Sunday_hours: "Closed",
-	Products_offered: ["meals", "snacks", "condiments", "drinks"],
-	Image: "https://resourcecenters.ucsc.edu/images/snack-pantry-instagram.png"
-	
+import PageTemplate from "../templateSite/page";
+import { db } from "@/app/firebaseConfig";
+import { getDocs, collection } from "firebase/firestore";
+import { useEffect, useState } from "react";
+
+async function fetchDataFromFirestore() {
+	const querySnapshot = await getDocs(collection(db, "locationData"));
+	const data = [];
+	querySnapshot.forEach((doc) => {
+		data.push({ id: doc.id, ...doc.data() });
+	});
+	return data;
 }
 
-export default function Home(){
-	return(<PageTemplate config={facilityConfig} />)
+export default function Home() {
+	const [loading, setLoading] = useState(true);
+	const [facilityConfig, setFacilityConfig] = useState(null);
+	useEffect(() => {
+		async function fetchData() {
+			const data = await fetchDataFromFirestore();
+			data.forEach((location) => {
+				if (location.Name == "Ethnic Resource Centers Snack Pantry") {
+					setFacilityConfig(location);
+					setLoading(false);
+				}
+			});
+		}
+		fetchData();
+	}, []);
 
+	return <>{loading ? <div></div> : <PageTemplate config={facilityConfig} />}</>;
 }

@@ -1,8 +1,11 @@
 "use client";
 
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
-import { useState, useCallback } from "react";
-import MenuBar from "../components/MenuBar";
+import { useState, useCallback, useEffect } from "react";
+import MenuBar from "@/app/components/MenuBar";
+import { db } from "@/app/firebaseConfig";
+import { getDocs, collection } from "firebase/firestore";
+
 import {
 	Box,
 	Button,
@@ -14,26 +17,22 @@ import {
 
 const containerStyle = {
 	width: "100vw",
-	height: "95vh",
-	top: "5vh",
+	height: "93vh",
+	top: "7vh",
 };
 const center = {
 	lat: 36.998714,
 	lng: -122.064035,
 };
 
-const locations = [
-	{
-		name: "Redwood Free Market",
-		position: { lat: 36.99156, lng: -122.06434 },
-		description:
-			"The Redwood Free Market is dedicated to decreasing basic needs insecurity by providing free access to healthy food and connecting students to campus and community resources. ",
-		image:
-			"https://m.media-amazon.com/images/M/MV5BMDlkZTNjMWMtNmVhYy00N2RiLTg1MWYtNjY4ZDdiOGJjN2VhXkEyXkFqcGc@._V1_.jpg",
-		link: "/Redwood-Free-Market",
-	},
-	{ name: "Porter Something", position: { lat: 36.999, lng: -122.064035 } },
-];
+async function fetchDataFromFirestore() {
+	const querySnapshot = await getDocs(collection(db, "locationData"));
+	const data = [];
+	querySnapshot.forEach((doc) => {
+		data.push({ id: doc.id, ...doc.data() });
+	});
+	return data;
+}
 
 function onMarkerClick(props) {
 	const { setOpen, setLocation, location } = props;
@@ -42,20 +41,23 @@ function onMarkerClick(props) {
 }
 
 function LocationDialog(props) {
-	const { open, setOpen, location } = props;
+	const { open, setOpen, location, loading } = props;
 
-	return (
+	// Add a check to ensure `location` exists before rendering content
+	return loading || !location ? (
+		<></>
+	) : (
 		<Dialog open={open} onClose={() => setOpen(false)}>
-			<DialogTitle>{location.name}</DialogTitle>
+			<DialogTitle>{location.Name}</DialogTitle>
 			<DialogContent>
 				<Box
 					component="img"
-					src={location.image}
-					alr={location.name}
+					src={location.Image}
+					alt={location.Name}
 					className="w-full justify-center"
 				/>
-				<DialogContentText>{location.description}</DialogContentText>
-				<a href={"/locations/" + location.link}>
+				<DialogContentText>{location.About}</DialogContentText>
+				<a href={"/locations" + location.Link}>
 					<Button variant="contained">More Info</Button>
 				</a>
 			</DialogContent>
@@ -69,9 +71,28 @@ function Map() {
 		googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_API_KEY,
 	});
 
+	const [loading, setLoading] = useState(true);
 	const [open, setOpen] = useState(false);
-	const [location, setLocation] = useState(locations[0]);
+	const [location, setLocation] = useState(null);
 	const [map, setMap] = useState(null);
+
+	const [locations, setLocations] = useState([]);
+
+	useEffect(() => {
+		async function fetchData() {
+			const data = await fetchDataFromFirestore();
+			const newLocations = data.map((location) => ({
+				Name: location.Name,
+				About: location.About,
+				Image: location.Image,
+				Link: location.Link,
+				Position: location.Location,
+			}));
+			setLocations(newLocations); // Update the state
+			setLoading(false);
+		}
+		fetchData();
+	}, []); // Empty dependency array ensures this runs once
 
 	const onLoad = useCallback(function callback(map) {
 		setMap(map);
@@ -81,18 +102,22 @@ function Map() {
 		setMap(null);
 	}, []);
 
-	const locationsPoints = locations.map((location, index) => (
-		<Marker
-			key={index}
-			position={location.position}
-			title={location.name}
-			// icon={{
-			// 	url: "https://media.istockphoto.com/id/1333645664/vector/pinpoint-with-fork-and-spoon-vector-icon-map-pointer-symbol-for-website-gps-navigator-apps.jpg?s=612x612&w=0&k=20&c=rvS0c2L4UBjKsK_nbzREdvDP4-vKe5-JI6AjDpNFwa8=",
-			// 	scaledSize: new window.google.maps.Size(40, 40),
-			// }}
-			onClick={() => onMarkerClick({ setOpen, setLocation, location })}
-		/>
-	));
+	const locationsPoints = locations.map((location, index) =>
+		loading ? (
+			<></>
+		) : (
+			<Marker
+				key={index}
+				position={location.Position}
+				title={location.Name}
+				// icon={{
+				// 	url: "https://media.istockphoto.com/id/1333645664/vector/pinpoint-with-fork-and-spoon-vector-icon-map-pointer-symbol-for-website-gps-navigator-apps.jpg?s=612x612&w=0&k=20&c=rvS0c2L4UBjKsK_nbzREdvDP4-vKe5-JI6AjDpNFwa8=",
+				// 	scaledSize: new window.google.maps.Size(40, 40),
+				// }}
+				onClick={() => onMarkerClick({ setOpen, setLocation, location })}
+			/>
+		)
+	);
 
 	return isLoaded ? (
 		<>
@@ -105,7 +130,12 @@ function Map() {
 			>
 				{locationsPoints}
 			</GoogleMap>
-			<LocationDialog open={open} setOpen={setOpen} location={location} />
+			<LocationDialog
+				open={open}
+				setOpen={setOpen}
+				location={location}
+				loading={loading}
+			/>
 		</>
 	) : (
 		<p>Loading map...</p> // Added fallback UI during loading

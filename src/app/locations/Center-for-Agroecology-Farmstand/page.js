@@ -1,23 +1,34 @@
-import PageTemplate from "../templateSite/page";
+"use client";
 
-const facilityConfig = {
-	Name: "Center for Agroecology Farmstand($)",
-	Location: "PLACE",
-	About: "Rooted in the Division of Social Sciences at UC Santa Cruz, the Center for Agroecology is an organization of staff, faculty, and students who work to advance agroecology and equitable food systems through experiential education, participatory research, agricultural extension, and public service.",
-	Monday_hours: "Closed",
-	Tuesday_hours: "Closed",
-	Wednesday_hours: "Closed",
-	Thursday_hours: "12:30PM - 6PM",
-	Friday_hours: "Closed",
-	Saturday_hours: "Closed",
-	Sunday_hours: "Closed",
-	Something: "hi",
-	Products_offered: ["Vegetables", "Fruits", "Flowers"],
-	Image: "https://scontent-sjc3-1.xx.fbcdn.net/v/t39.30808-6/247318688_4620237097996639_9215880347317424199_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=TUg0DL8xnXkQ7kNvgFaLdQv&_nc_ht=scontent-sjc3-1.xx&_nc_gid=AcW6mRyuBPSPmm7S48FhIgU&oh=00_AYBaHbLBXWYdePtdAEa17YsX0u1LV1RDGmgC7K-ckTQ5pw&oe=671129EC"
-	
+import PageTemplate from "../templateSite/page";
+import { db } from "@/app/firebaseConfig";
+import { getDocs, collection } from "firebase/firestore";
+import { useEffect, useState } from "react";
+
+async function fetchDataFromFirestore() {
+	const querySnapshot = await getDocs(collection(db, "locationData"));
+	const data = [];
+	querySnapshot.forEach((doc) => {
+		data.push({ id: doc.id, ...doc.data() });
+	});
+	return data;
 }
 
-export default function Home(){
-	return(<PageTemplate config={facilityConfig} />)
+export default function Home() {
+	const [loading, setLoading] = useState(true);
+	const [facilityConfig, setFacilityConfig] = useState(null);
+	useEffect(() => {
+		async function fetchData() {
+			const data = await fetchDataFromFirestore();
+			data.forEach((location) => {
+				if (location.Name == "Center for Agroecology Farmstand($)") {
+					setFacilityConfig(location);
+					setLoading(false);
+				}
+			});
+		}
+		fetchData();
+	}, []);
 
+	return <>{loading ? <div></div> : <PageTemplate config={facilityConfig} />}</>;
 }
