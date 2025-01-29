@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Hackathon Project: UCSC Basic Needs Navigator
 
-## Getting Started
+## Overview
 
-First, run the development server:
+There are many on-campus basic needs facilities at UCSC, but unfortunately, many of them are underutilized. Students are often unaware of these resources, their locations, and what they offer. This app aims to bridge that gap by providing a platform for facilities to post their available products and a map to help students easily locate them.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Many students struggle to find food pantries and other essential resources simply because of accessibility issues. Eric, who currently works at the Redwood Free Market, frequently encounters students asking about specific products and their availability. This app allows users to:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- View the products available at each facility, including images uploaded by facility staff.
+- Navigate to each facility using an integrated map, which can also help students locate donation sites for unused food or goods.
+- (In development) Submit questions, comments, or recommendations about each facility. This feature will also allow facilities to maintain an FAQ section and automatically send student inquiries via email. A major challenge Eric's boss faces is determining which new products or programs would be most beneficial to students, and direct student feedback can help address this.
+## Website Functions Breakdown
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### **About Section**
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Introduction and overview of basic needs facilities
+- Contact information and team introduction
 
-## Learn More
+### **Home**
 
-To learn more about Next.js, take a look at the following resources:
+- Central hub for the app
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### **Google Maps Integration**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Displays all campus facilities on an interactive map
+- Shows user location relative to each facility
+- Clickable locations with more information on each facility
 
-## Deploy on Vercel
+### **Individual Facility Pages**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Detailed directory for each location with up-to-date inventory and images
+- About section for each facility
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## **Basic Needs Facilities Covered**
+
+- Redwood Free Market
+- Cowell Coffee Shop
+- Produce Pop-up ($)
+- Terry-Freitas Cafe
+- The Cove
+- Center for Agroecology Farmstand ($)
+- Womxn’s Center Food Pantry
+- Ethnic Resource Centers Snack Pantry
+- Lionel Cantú Queer Center Food Pantry
+
+## **Relation to Sustainability and Social Good**
+
+Food and other basic needs insecurities are a more significant issue than the university acknowledges. The Redwood Free Market alone received over 11,000 visits last year, and demand continues to grow. Despite this, surplus food still goes to waste when it could benefit students in need.
+
+This app aims to:
+
+- Make UCSC’s basic needs program more accessible, helping students who were previously unaware of these resources.
+- Reduce unnecessary trips to grocery stores, thereby saving fuel and lowering carbon emissions.
+- Provide a convenient way for students to donate excess food rather than discarding it. Many people throw away unused goods simply because they lack an easy way to donate them.
+
+By centralizing and simplifying access to these essential resources, this project promotes sustainability, reduces food waste, and ensures that students can meet their basic needs efficiently.
